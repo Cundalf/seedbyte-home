@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="SeedByte: IA práctica para desarrolladores. Libro en construcción por Agustín Cundari." />
+  <title>SeedByte — IA práctica para desarrolladores</title>
+
+  <!-- Tipografía -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b1410;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.60);
+      --border: rgba(255,255,255,.14);
+
+      /* Verde SeedByte */
+      --brand: #47d16a;
+      --brand2:#2fbf54;
+      --brand3:#1f8e3a;
+
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 10% 10%, rgba(71,209,106,.18), transparent 55%),
+                  radial-gradient(1000px 600px at 90% 20%, rgba(71,209,106,.12), transparent 60%),
+                  radial-gradient(900px 600px at 50% 110%, rgba(47,191,84,.10), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a{color:inherit}
+    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
+
+    /* Top bar */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(11,20,16,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 0;
+      gap: 14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 190px;
+      text-decoration:none;
+    }
+    .brand img{
+      width:40px; height:40px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.08);
+      padding: 6px;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .brand strong{font-weight:800; letter-spacing:-.02em}
+    .brand span{display:block; font-size:12px; color:var(--muted2); margin-top:-2px}
+
+    .links{
+      display:flex;
+      align-items:center;
+      gap: 18px;
+    }
+    .links a{
+      color: var(--muted);
+      text-decoration:none;
+      font-weight:600;
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 10px;
+    }
+    .links a:hover{background: rgba(255,255,255,.06); color: var(--text)}
+    .cta-row{display:flex; align-items:center; gap:10px}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-weight: 700;
+      text-decoration:none;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      box-shadow: none;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      white-space: nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.18)}
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(71,209,106,.95), rgba(47,191,84,.92));
+      color: #07110b;
+      border: 1px solid rgba(71,209,106,.55);
+      box-shadow: 0 12px 40px rgba(71,209,106,.20);
+    }
+    .btn.primary:hover{transform: translateY(-1px); box-shadow: 0 16px 46px rgba(71,209,106,.24)}
+    .btn.ghost{
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .hamburger{
+      display:none;
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      cursor:pointer;
+    }
+
+    /* Hero */
+    .hero{padding: 64px 0 26px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 26px;
+      align-items: center;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(71,209,106,.24);
+      background: rgba(71,209,106,.10);
+      color: rgba(255,255,255,.86);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .01em;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 4px rgba(71,209,106,.16);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(34px, 4.2vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+    .sub{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: clamp(16px, 1.6vw, 18px);
+      max-width: 62ch;
+    }
+    .hero-actions{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 20px 0 12px;
+    }
+    .meta{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 14px;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    .meta b{color: rgba(255,255,255,.84)}
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      position: relative;
+      overflow:hidden;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(500px 240px at 30% 20%, rgba(71,209,106,.20), transparent 60%),
+                  radial-gradient(480px 260px at 90% 110%, rgba(47,191,84,.14), transparent 65%);
+      pointer-events:none;
+    }
+    .hero-card > *{position:relative}
+    .logo-wrap{
+      display:flex;
+      gap: 14px;
+      align-items:center;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(0,0,0,.20);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .logo-wrap img{
+      width: 76px; height:auto;
+      max-width: 100%;
+      border-radius: 14px;
+      background: rgba(255,255,255,.95);
+      padding: 10px;
+    }
+    .hero-card h3{
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: -.01em;
+    }
+    .hero-card p{
+      margin: 6px 0 0;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    .statgrid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .stat{
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+    }
+    .stat .num{font-weight: 800; letter-spacing:-.02em}
+    .stat .lbl{color: var(--muted2); font-size: 12px; margin-top: 3px}
+
+    /* Sections */
+    section{padding: 44px 0}
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 26px;
+      letter-spacing:-.02em;
+    }
+    .section-title p{
+      margin:0;
+      color: var(--muted2);
+      max-width: 60ch;
+      font-size: 14px;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.25);
+    }
+    .card .icon{
+      width: 40px; height: 40px;
+      border-radius: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(71,209,106,.14);
+      border: 1px solid rgba(71,209,106,.25);
+      margin-bottom: 10px;
+    }
+    .card h3{margin: 0 0 6px; font-size: 16px; letter-spacing:-.01em}
+    .card p{margin:0; color: var(--muted2); font-size: 14px}
+
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .list{
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      display:grid;
+      gap: 10px;
+    }
+    .li{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+    }
+    .check{
+      flex: 0 0 auto;
+      width: 18px; height: 18px;
+      border-radius: 6px;
+      margin-top: 1px;
+      background: rgba(71,209,106,.22);
+      border: 1px solid rgba(71,209,106,.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: #08110b;
+      font-weight: 900;
+      font-size: 12px;
+    }
+    .li b{display:block; font-size:14px}
+    .li span{display:block; color: var(--muted2); font-size: 13px; margin-top: 2px}
+
+    .callout{
+      background: linear-gradient(180deg, rgba(71,209,106,.16), rgba(255,255,255,.05));
+      border: 1px solid rgba(71,209,106,.25);
+      border-radius: calc(var(--radius) + 6px);
+      padding: 18px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      overflow:hidden;
+      position:relative;
+    }
+    .callout:before{
+      content:"";
+      position:absolute;
+      width: 520px; height: 520px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(71,209,106,.22), transparent 60%);
+      right: -260px;
+      top: -260px;
+      pointer-events:none;
+    }
+    .callout > *{position:relative}
+    .callout h3{margin:0 0 6px; font-size: 18px}
+    .callout p{margin:0; color: var(--muted); max-width: 70ch}
+    .callout .row{
+      margin-top: 14px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items:center;
+      justify-content: space-between;
+    }
+
+    footer{
+      padding: 28px 0 36px;
+      color: var(--muted2);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .foot{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items:center;
+      justify-content: space-between;
+    }
+    .foot a{color: rgba(255,255,255,.82); text-decoration:none}
+    .foot a:hover{text-decoration:underline}
+
+    /* Mobile */
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns: 1fr; }
+      .grid3{grid-template-columns: 1fr}
+      .split{grid-template-columns: 1fr}
+      .links{display:none}
+      .hamburger{display:inline-flex; align-items:center; justify-content:center}
+      .mobile-menu{
+        display:none;
+        padding: 8px 0 16px;
+      }
+      .mobile-menu.open{display:block}
+      .mobile-menu a{
+        display:block;
+        padding: 12px 12px;
+        border-radius: 12px;
+        text-decoration:none;
+        color: var(--muted);
+        font-weight: 700;
+      }
+      .mobile-menu a:hover{background: rgba(255,255,255,.06); color: var(--text)}
+      .cta-row{display:none}
+    }
+
+    /* Focus styles */
+    :focus-visible{
+      outline: 3px solid rgba(71,209,106,.55);
+      outline-offset: 2px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="SeedByte inicio">
+          <!-- Reemplazá el src por la ruta donde guardes el logo -->
+          <img src="./seedbyte-logo.png" alt="Logo SeedByte" />
+          <div>
+            <strong>SeedByte</strong>
+            <span>IA práctica para devs</span>
+          </div>
+        </a>
+
+        <nav class="links" aria-label="Navegación principal">
+          <a href="#libro">Libro</a>
+          <a href="#contenido">Qué incluye</a>
+          <a href="#sobre">Sobre mí</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+
+        <div class="cta-row">
+          <a class="btn ghost" href="https://agustincundari.com.ar" target="_blank" rel="noopener">Perfil profesional</a>
+          <a class="btn primary" href="#libro">Ver el libro</a>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+          ☰
+        </button>
+      </div>
+
+      <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Navegación móvil">
+        <a href="#libro">Libro</a>
+        <a href="#contenido">Qué incluye</a>
+        <a href="#sobre">Sobre mí</a>
+        <a href="#contacto">Contacto</a>
+        <a href="https://agustincundari.com.ar" target="_blank" rel="noopener">Perfil profesional</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="top" class="container">
+    <section class="hero" aria-label="Hero">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker"><span class="dot"></span> Proyecto SeedByte (antes: CundaTech)</div>
+          <h1>Construyendo un libro de IA<br/>para desarrolladores, sin humo.</h1>
+          <p class="sub">
+            Un enfoque práctico para diseñar prompts, integrar LLMs, manejar contexto, seguridad y UX.
+            Pensado para aplicar en producto y en sistemas reales.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#libro">Explorar el libro</a>
+            <a class="btn" href="https://agustincundari.com.ar" target="_blank" rel="noopener">agustincundari.com.ar</a>
+            <a class="btn ghost" href="#contenido">Ver temario</a>
+          </div>
+
+          <div class="meta">
+            <span><b>Formato:</b> ebook (en construcción)</span>
+            <span><b>Enfoque:</b> dev-first</span>
+            <span><b>Objetivo:</b> que lo uses en proyectos</span>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Tarjeta del proyecto">
+          <div class="logo-wrap">
+            <img src="./seedbyte-logo.png" alt="SeedByte" />
+            <div>
+              <h3>SeedByte</h3>
+              <p>Contenido técnico, accionable y orientado a integración.</p>
+            </div>
+          </div>
+
+          <div class="statgrid" aria-label="Puntos clave">
+            <div class="stat">
+              <div class="num">Prompts → diseño</div>
+              <div class="lbl">contratos, restricciones y formatos</div>
+            </div>
+            <div class="stat">
+              <div class="num">De prototipo a prod</div>
+              <div class="lbl">validación, riesgos y guardrails</div>
+            </div>
+            <div class="stat">
+              <div class="num">Contexto y memoria</div>
+              <div class="lbl">qué guardar, qué no y por qué</div>
+            </div>
+            <div class="stat">
+              <div class="num">UX con IA</div>
+              <div class="lbl">latencia, streaming, confianza</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- VALUE PROPS -->
+    <section id="contenido" aria-label="Qué incluye">
+      <div class="section-title">
+        <h2>Qué incluye SeedByte</h2>
+        <p>Contenido pensado para pasar de “probar prompts” a diseñar interacción y resultados consistentes.</p>
+      </div>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="icon" aria-hidden="true">🧩</div>
+          <h3>Prompts como contratos</h3>
+          <p>Objetivos, restricciones y formato. Pedir vs especificar. Salidas estructuradas para integraciones confiables.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">🧠</div>
+          <h3>Contexto, memoria y ruido</h3>
+          <p>Stateless vs stateful, qué recordar, cuándo el contexto degrada y cómo mantener conversaciones útiles.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">🛡️</div>
+          <h3>Riesgos y seguridad</h3>
+          <p>Diseño defensivo: validación, separación de instrucciones, mitigaciones y prácticas para no llevar humo a prod.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOK -->
+    <section id="libro" aria-label="Libro">
+      <div class="split">
+        <div class="card">
+          <h3 style="margin-top:0">El libro (en construcción)</h3>
+          <p style="color:var(--muted2); margin-top:6px">
+            SeedByte documenta patrones, decisiones y trade-offs reales al integrar IA en productos.
+            La idea es que puedas reutilizar estructura mental y templates, no copiar prompts.
+          </p>
+
+          <ul class="list" aria-label="Capítulos y enfoque">
+            <li class="li">
+              <div class="check">✓</div>
+              <div>
+                <b>Prompts como diseño</b>
+                <span>rol, tarea, contexto, formato; chaining; generación vs verificación; variabilidad.</span>
+              </div>
+            </li>
+            <li class="li">
+              <div class="check">✓</div>
+              <div>
+                <b>Producto y experiencia</b>
+                <span>latencia real vs percibida, streaming, frustración/ambigüedad, confianza del usuario.</span>
+              </div>
+            </li>
+            <li class="li">
+              <div class="check">✓</div>
+              <div>
+                <b>Prototipos vs producción</b>
+                <span>qué probar primero, qué no llevar directo, validación humana como diseño.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="callout">
+          <h3>Seguí el proyecto y mi trabajo profesional</h3>
+          <p>
+            Referencia directa a mi página profesional para contexto, proyectos y contacto.
+          </p>
+          <div class="row">
+            <div style="display:flex; flex-direction:column; gap:6px">
+              <span style="color:rgba(255,255,255,.86); font-weight:800">agustincundari.com.ar</span>
+              <span style="color:var(--muted2); font-size:13px">Perfil, experiencia y formas de contacto.</span>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap">
+              <a class="btn primary" href="https://agustincundari.com.ar" target="_blank" rel="noopener">Abrir web</a>
+              <a class="btn" href="#contacto">Contactar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="sobre" aria-label="Sobre el autor">
+      <div class="section-title">
+        <h2>Sobre mí</h2>
+        <p>SeedByte nace de integrar IA en contextos reales: decisiones de diseño, límites, riesgos y UX.</p>
+      </div>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="icon" aria-hidden="true">⚙️</div>
+          <h3>Dev + producto</h3>
+          <p>Enfoque en integraciones, trade-offs, latencia, costos y mantenibilidad (no demos aisladas).</p>
+        </div>
+        <div class="card">
+          <div class="icon" aria-hidden="true">📐</div>
+          <h3>Estructura reusable</h3>
+          <p>Frameworks, checklists y patrones que podés aplicar a distintos proveedores y modelos.</p>
+        </div>
+        <div class="card">
+          <div class="icon" aria-hidden="true">🔎</div>
+          <h3>Honestidad técnica</h3>
+          <p>Qué esperar de un LLM, por qué “alucina”, cómo reducirlo y cuándo no conviene usar IA.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contacto" aria-label="Contacto">
+      <div class="callout">
+        <h3>¿Querés colaborar, dar feedback o pedir una versión para tu equipo?</h3>
+        <p>
+          Escribime desde mi web profesional. SeedByte está pensado para evolucionar con casos reales y feedback.
+        </p>
+        <div class="row">
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn primary" href="https://agustincundari.com.ar" target="_blank" rel="noopener">Contactar en agustincundari.com.ar</a>
+            <a class="btn ghost" href="#top">Volver arriba</a>
+          </div>
+          <div style="color:var(--muted2); font-size:13px">
+            Tip: si lo publicás, reemplazá <code style="background:rgba(0,0,0,.25); padding:2px 6px; border-radius:8px; border:1px solid rgba(255,255,255,.10)">./seedbyte-logo.png</code> por tu ruta real.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer aria-label="Footer">
+      <div class="foot">
+        <div>© <span id="year"></span> SeedByte — IA práctica para desarrolladores</div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap">
+          <a href="#libro">Libro</a>
+          <a href="#contenido">Contenido</a>
+          <a href="https://agustincundari.com.ar" target="_blank" rel="noopener">agustincundari.com.ar</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Año footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Menú móvil
+    const btn = document.getElementById("hamburger");
+    const menu = document.getElementById("mobile-menu");
+
+    btn?.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("open");
+      btn.setAttribute("aria-expanded", String(isOpen));
+      btn.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+    });
+
+    // Cerrar menú al clickear un link
+    menu?.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        menu.classList.remove("open");
+        btn.setAttribute("aria-expanded", "false");
+        btn.setAttribute("aria-label", "Abrir menú");
+      });
+    });
+  </script>
+</body>
+</html>
