@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Libros · Seedbyte</title>
+    <meta
+      name="description"
+      content="Explora el ebook de Seedbyte y elige tu canal de compra preferido."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container navbar">
+        <a class="logo" href="/">Seedbyte</a>
+        <nav class="nav-links">
+          <a href="/libros/">Libros</a>
+          <a href="/sobre/">Sobre</a>
+          <a href="mailto:contacto@seedbyte.dev">Contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-title">
+        <div class="container">
+          <p class="tag">Catálogo</p>
+          <h1>Libros y recursos</h1>
+          <p class="note">
+            Seedbyte es un laboratorio abierto. Aquí viven los materiales que sintetizan
+            aprendizajes y los comparten en formatos accesibles.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <article class="card product-card">
+            <span class="badge">Ebook</span>
+            <h3>Seedbyte: mapas para pensar con IA</h3>
+            <p>
+              Un recorrido práctico y reflexivo para trabajar con modelos de lenguaje sin
+              perder la mirada crítica. Incluye frameworks, ejercicios y guías para tomar
+              decisiones con criterio.
+            </p>
+            <div class="button-group">
+              <a data-link-key="amazon" href="#">Comprar en Amazon</a>
+              <a data-link-key="gumroad" href="#">Comprar internacional (Gumroad)</a>
+              <a data-link-key="cafecito" href="#">Comprar en pesos (Argentina)</a>
+            </div>
+            <p class="note">
+              Para actualizar los links de compra, edita
+              <code>assets/js/config.js</code> y reemplaza las URLs.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <strong>contacto@seedbyte.dev</strong>
+          <div class="small">Respondo propuestas de workshops y colaboraciones.</div>
+        </div>
+        <div class="small">Contenido bajo licencia CC-BY-SA.</div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>
