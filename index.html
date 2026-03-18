@@ -1,90 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Seedbyte · Ideas, libros y herramientas</title>
-    <meta
-      name="description"
-      content="Seedbyte es un laboratorio personal de conocimiento sobre tecnología, IA y pensamiento crítico."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/assets/css/styles.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container navbar">
-        <a class="logo" href="/">Seedbyte</a>
-        <nav class="nav-links">
-          <a href="/libros/">Libros</a>
-          <a href="/sobre/">Sobre</a>
-          <a href="mailto:contacto@seedbyte.dev">Contacto</a>
-        </nav>
-      </div>
-    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seedbyte | En proceso de build...</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+        .apple-bounce {
+            animation: soft-bounce 3s ease-in-out infinite;
+        }
+        @keyframes soft-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .progress-bar-fill {
+            width: 70%;
+            animation: pulse-progress 2s infinite ease-in-out;
+        }
+        @keyframes pulse-progress {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-6 overflow-hidden">
 
-    <main>
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <div class="tag">Laboratorio vivo</div>
-            <h1>Seedbyte</h1>
-            <p>Ideas, libros y herramientas para ir más allá del prompt.</p>
-            <a class="cta" href="/libros/">Explorar</a>
-          </div>
-          <div class="card">
-            <p class="badge">Manifiesto</p>
-            <h2>Conocimiento que respira</h2>
-            <p>
-              Seedbyte es un cuaderno de campo: investiga, sintetiza y comparte aprendizajes
-              sobre tecnología, inteligencia artificial y pensamiento crítico. Hoy es un ebook.
-              Mañana pueden ser talleres, herramientas o una biblioteca entera.
-            </p>
-            <p class="note">Cada entrega busca claridad, calma y profundidad.</p>
-          </div>
+    <div class="max-w-md w-full text-center space-y-8">
+        
+        <!-- Logo Container -->
+        <div class="relative inline-block apple-bounce">
+            <!-- Usamos el archivo avatar.jpg que subiste -->
+            <img src="avatar.jpg" alt="Seedbyte Logo" class="w-48 h-48 mx-auto rounded-full shadow-2xl bg-white p-2">
+            
+            <!-- Tooltip/Chiste flotante -->
+            <div class="absolute -top-4 -right-12 bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform rotate-12">
+                ¡Oops! 🍎
+            </div>
         </div>
-      </section>
 
-      <section class="section">
-        <div class="container grid">
-          <div class="card">
-            <h2>Un hub de productos digitales</h2>
-            <p>
-              Mantengo todo en un mismo lugar para que sea simple descubrir, comprar y
-              acompañar el crecimiento del proyecto.
+        <!-- Text Content -->
+        <div class="space-y-4">
+            <h1 class="text-4xl font-extrabold text-slate-800 tracking-tight">
+                En proceso de <span class="text-green-600">build...</span>
+            </h1>
+            
+            <p class="text-slate-600 leading-relaxed">
+                Parece que alguien se tomó muy en serio lo de "morder la manzana" y se comió un <span class="font-mono bg-slate-200 px-1 rounded text-sm">byte</span> crítico del sistema. 
             </p>
-          </div>
-          <div class="card">
-            <h2>Multiples caminos de compra</h2>
-            <p>
-              Amazon KDP para lectores globales, Gumroad para compras internacionales, y
-              Cafecito/MercadoPago para Argentina en pesos.
+            
+            <p class="text-sm text-slate-500 italic">
+                Estamos reconstruyendo el stack desde la semilla.
             </p>
-          </div>
-          <div class="card">
-            <h2>Rápido, claro y sin fricción</h2>
-            <p>
-              El sitio es estático, liviano y listo para alojarse en Cloudflare Pages.
-              Puedes extenderlo sin depender de bases de datos.
-            </p>
-          </div>
         </div>
-      </section>
-    </main>
 
-    <footer class="site-footer">
-      <div class="container footer-grid">
-        <div>
-          <strong>contacto@seedbyte.dev</strong>
-          <div class="small">Escribime para alianzas, talleres o feedback.</div>
+        <!-- Fake Progress Bar -->
+        <div class="space-y-2">
+            <div class="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest">
+                <span>Status: Regando bits</span>
+                <span>70%</span>
+            </div>
+            <div class="w-full h-3 bg-slate-200 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500 progress-bar-fill rounded-full"></div>
+            </div>
         </div>
-        <div class="small">Contenido bajo licencia CC-BY-SA.</div>
-      </div>
-    </footer>
-  </body>
+
+        <!-- Footer / Links -->
+        <div class="pt-8 border-t border-slate-200 flex flex-col gap-4">
+            <p class="text-slate-500 text-sm">
+                Mientras tanto, podés chusmear el laboratorio:
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="https://blog.seedbyte.dev" class="px-6 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-sm font-semibold rounded-xl transition-all shadow-md active:scale-95">
+                    Ir al Blog
+                </a>
+            </div>
+        </div>
+
+        <!-- Bottom Log -->
+        <div class="text-[10px] font-mono text-slate-400 mt-12 space-y-1">
+            <p>> seedbyte --init</p>
+            <p>> critical: missing_byte_found_in_stomach</p>
+            <p>> rebuilding_knowledge_respiring...</p>
+        </div>
+
+    </div>
+
+</body>
 </html>
